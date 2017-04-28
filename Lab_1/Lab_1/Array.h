@@ -17,17 +17,17 @@ class Array
 	int* resize_array();
 
 public:
-	Array();
+	Array();// копирования, с параметрами //метод copy
 	~Array();
 	void view() const;
-	void add_item(int value);
-	void remove_item_val(int value);
-	void remove_item_index(int index);
-	int search_item(int value);
-	void replace_value(int index, int value);
-	int get_size()const;
-	int get_max_size()const;
-	int get_item(int index)const;
-	int get_maxVal()const;
-	int get_minVal()const;
+	void add_item(int value);//add
+	void remove_item_val(int value);//remove
+	void remove_item_index(int index);//removebyindex
+	int search_item(int value);//search
+	void replace_value(int index, int value);//repace
+	int get_size()const; //size || count ||length
+	int get_max_size()const;//max_size
+	int get_item(int index)const;//get
+	int get_maxVal()const;//max
+	int get_minVal()const;//min
 };
