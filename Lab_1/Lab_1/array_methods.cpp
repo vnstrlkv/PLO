@@ -91,11 +91,40 @@ int* Array::resize_array()
 
 	return tmp;
 }
-int Array::view_max_size()
+
+int Array::get_max_size() const
 {
 	return max_size;
 }
-int Array::view_size()
+int Array::get_size() const
 {
 	return size;
+}
+int Array::get_item(int index) const
+{
+	int tmp = NULL;
+	if (index<size)
+	tmp= ptr_array[index];
+	return tmp;
+}
+int Array::get_maxVal() const
+{
+	int tmp = ptr_array[0];
+	{
+		for (int i = 1; i < size; i++)
+			if (tmp < ptr_array[i])
+				tmp = ptr_array[i];
+	}
+	return tmp;
+}
+
+int Array::get_minVal() const
+{
+	int tmp = ptr_array[0];
+	{
+		for (int i = 1; i < size; i++)
+			if (tmp > ptr_array[i])
+				tmp = ptr_array[i];
+	}
+	return tmp;
 }

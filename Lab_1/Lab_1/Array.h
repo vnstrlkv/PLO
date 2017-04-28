@@ -23,6 +23,9 @@ public:
 	void remove_item_val(int);
 	void remove_item_index(int);
 	int search_item(int);
-	int view_max_size();
-	int view_size();
+	int get_size()const;
+	int get_max_size()const;
+	int get_item(int)const;
+	int get_maxVal()const;
+	int get_minVal()const;
 };
