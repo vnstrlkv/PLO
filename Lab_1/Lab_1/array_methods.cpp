@@ -6,7 +6,6 @@ Array::Array()
 	current_index = 0;
 	ptr_array = new int[max_size];
 	size = 0;
-
 }
 
 Array::~Array()
@@ -17,7 +16,11 @@ Array::~Array()
 void Array::view() const
 {
 	for (int i = 0; i < size; i++)
-		std::cout << i << ":" << ptr_array[i] << " ";
+	{
+		if (i % 5 == 0)
+			std::cout << std::endl<<std::endl;
+		std::cout << std::setw(4) << std::left << i << ":" << std::setw(5) << std::left  << ptr_array[i] << "| ";
+	}
 	std::cout<< std::endl;
 }
 
@@ -44,7 +47,7 @@ void Array::remove_item_val(int val)
 
 void Array::remove_item_index(int index)
 {
-	if (index < size)
+	if (index>=0 && index < size)
 	{
 		{
 			for (int i = index; i < size; i++)
@@ -88,8 +91,13 @@ int* Array::resize_array()
 			tmp[i] = ptr_array[i];
 		delete[] ptr_array;
 	}
-
 	return tmp;
+}
+
+void Array::replace_value(int index, int value)
+{
+	if (index>=0 && index < size)
+	ptr_array[index] = value;
 }
 
 int Array::get_max_size() const

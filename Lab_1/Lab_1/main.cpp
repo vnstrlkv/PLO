@@ -11,7 +11,8 @@ void show_menu()
 		<< "5. Get max value" << std::endl
 		<< "6. Get min value" << std::endl
 		<< "7. Get size" << std::endl
-		<<"esc: exit" << std::endl << std::endl;
+		<< "8. Replace value" << std::endl
+		<< "esc: exit" << std::endl << std::endl;
 }
 
 void menu(Array &arr)
@@ -77,6 +78,19 @@ void menu(Array &arr)
 		std::cout << arr.get_size() << std::endl;
 		break;
 	}
+	case '8':
+	{
+		std::cout << "Input index: " << std::endl;
+		int index;
+		std:: cin >> index;
+		std::cout << std::endl;
+		std::cout << "Input value: " << std::endl;
+		int value;
+		std::cin >> value;
+		std::cout << std::endl;
+		arr.replace_value(index, value);
+		break;
+	}
 	}
 	menu(arr);
 }
@@ -89,7 +103,7 @@ void main()
 		arr.add_item(i);
 //		std::cout << "max= "<<arr.get_max_size() << " size ="<<arr.get_size()<<std::endl;
 	}
-	for (int i = 9990; i >= 0; i--)
+	for (int i = 9989; i >= 0; i--)
 	{
 		arr.remove_item_index(i);
 //		std::cout << "max= " << arr.get_max_size() << " size =" << arr.get_size() << std::endl;
