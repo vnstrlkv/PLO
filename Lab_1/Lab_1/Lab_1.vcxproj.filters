@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="array_methods.cpp">
+    <ClCompile Include="Array_methods.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

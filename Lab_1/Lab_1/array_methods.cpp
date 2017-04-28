@@ -2,32 +2,31 @@
 
 Array::Array()
 {
-	std::cout << "hello"<<std::endl;
-	Array::max_size = 100;
-	Array::current_index = 0;
-	Array::pointer = new int[100];
-	Array::size = 0;
+	max_size = 100;
+	current_index = 0;
+	ptr_array = new int[max_size];
+	size = 0;
 
 }
 
 Array::~Array()
 {
-	delete pointer;
+	delete ptr_array;
 }
 
-void Array::view()
+void Array::view() const
 {
 	for (int i = 0; i < size; i++)
-		std::cout << i << ":" << pointer[i] << " ";
+		std::cout << i << ":" << ptr_array[i] << " ";
 	std::cout<< std::endl;
 }
 
 
 void Array::add_item(int val)
 {
-
-	pointer[size] = val;
-	size++;
+		ptr_array=resize_array();	
+		ptr_array[size] = val;
+		size++;		
 }
 void Array::remove_item_val(int val)
 {
@@ -36,22 +35,24 @@ void Array::remove_item_val(int val)
 	{
 		{
 			for (int i = number; i < size - 1; i++)
-				pointer[i] = pointer[i + 1];
+				ptr_array[i] = ptr_array[i + 1];
 		}
 		size--;
 	}
+		ptr_array = resize_array();
 }
 
 void Array::remove_item_index(int index)
 {
-	if (index <= size)
+	if (index < size)
 	{
 		{
-			for (int i = index; i < size - 1; i++)
-				pointer[i] = pointer[i + 1];
+			for (int i = index; i < size; i++)
+				ptr_array[i] = ptr_array[i + 1];
 		}
 		size--;
 	}
+	ptr_array = resize_array();
 }
 
 int Array::search_item(int item)
@@ -59,11 +60,42 @@ int Array::search_item(int item)
 	current_index = NULL;
 	for (int i=0;i<size;i++)
 
-		if (pointer[i] == item)
+		if (ptr_array[i] == item)
 		{
 			current_index = i;
 			break;
 		}
 
 	return current_index;
+}
+
+int* Array::resize_array()
+{
+	int *tmp=ptr_array;
+	if (size >= max_size / 3 * 2)
+	{
+		max_size = max_size * 2;
+		tmp=new int [max_size];
+		for (int i = 0; i < size; i++)
+			tmp[i] = ptr_array[i];
+		delete[] ptr_array;
+	}
+	else if (size <= max_size / 2 && max_size>100)
+	{
+		max_size = max_size / 3 * 2;
+		tmp = new int[max_size];
+		for (int i = 0; i < size; i++)
+			tmp[i] = ptr_array[i];
+		delete[] ptr_array;
+	}
+
+	return tmp;
+}
+int Array::view_max_size()
+{
+	return max_size;
+}
+int Array::view_size()
+{
+	return size;
 }

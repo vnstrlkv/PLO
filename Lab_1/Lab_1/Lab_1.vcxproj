@@ -143,7 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="array_methods.cpp" />
+    <ClCompile Include="Array_methods.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />

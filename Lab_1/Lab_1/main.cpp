@@ -3,7 +3,7 @@
 void menu(Array &arr);
 void show_menu()
 {
-	std::cout << "1.View array" << std::endl << "2. Add item" << std::endl << "3. Remove item by val" << std::endl << "4. Remove item by index" << std::endl << std::endl;
+	std::cout << "1. View array" << std::endl << "2. Add item" << std::endl << "3. Remove item by val" << std::endl << "4. Remove item by index" << std::endl <<"esc: exit" << std::endl << std::endl;
 }
 
 void menu(Array &arr)
@@ -13,7 +13,7 @@ void menu(Array &arr)
 	key=getch();
 	switch (key)
 	{
-	case '0':
+	case '\033':
 	{
 		exit(0);
 		break;
@@ -57,5 +57,15 @@ void menu(Array &arr)
 void main()
 {
 	Array arr;
+	for (int i = 0; i < 10000; i++)
+	{
+		arr.add_item(i);
+		std::cout << "max= "<<arr.view_max_size() << " size ="<<arr.view_size()<<std::endl;
+	}
+	for (int i = 9990; i > 0; i--)
+	{
+		arr.remove_item_index(i);
+		std::cout << "max= " << arr.view_max_size() << " size =" << arr.view_size() << std::endl;
+	}
 	menu(arr);
 }
