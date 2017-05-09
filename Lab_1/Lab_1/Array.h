@@ -18,16 +18,18 @@ class Array
 
 public:
 	Array();// копирования, с параметрами //метод copy
+	Array(int size, int value, ...);
+
 	~Array();
 	void view() const;
-	void add_item(int value);//add
-	void remove_item_val(int value);//remove
+	void add(int value);//add
+	void remove(int value);//remove
 	void remove_item_index(int index);//removebyindex
-	int search_item(int value);//search
-	void replace_value(int index, int value);//repace
-	int get_size()const; //size || count ||length
-	int get_max_size()const;//max_size
-	int get_item(int index)const;//get
-	int get_maxVal()const;//max
-	int get_minVal()const;//min ///
+	int search(int value);//search
+	void replace(int index, int value);//repace
+	int size()const; //size || count ||length
+	int max_size()const;//max_size
+	int get(int index)const;//get
+	int max()const;//max
+	int min()const;//min ///
 };
