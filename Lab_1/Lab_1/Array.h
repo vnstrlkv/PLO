@@ -29,5 +29,5 @@ public:
 	int get_max_size()const;//max_size
 	int get_item(int index)const;//get
 	int get_maxVal()const;//max
-	int get_minVal()const;//min
+	int get_minVal()const;//min ///
 };
