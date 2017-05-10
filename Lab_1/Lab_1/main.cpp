@@ -38,7 +38,7 @@ void menu(Array &arr)
 		std::cout << "Input val: ";
 		std::cin >> val;
 		std::cout << std::endl;
-		arr.add_item(val);
+		arr.add(val);
 		break;
 	}
 	case '3':
@@ -47,7 +47,7 @@ void menu(Array &arr)
 		std::cout << "Input val: ";
 		std::cin >> val;
 		std::cout << std::endl;
-		arr.remove_item_val(val);
+		arr.remove(val);
 		break;
 	}
 	case '4':
@@ -56,26 +56,26 @@ void menu(Array &arr)
 		std::cout << "Input index: ";
 		std::cin >> index;
 		std::cout << std::endl;
-		arr.remove_item_index(index);
+		arr.removeByIndex(index);
 		break;
 	}
 
 	case '5':
 	{
 		std::cout << "Max value: ";
-		std::cout <<arr.get_maxVal()<< std::endl;
+		std::cout <<arr.max()<< std::endl;
 		break;
 	}
 	case '6':
 	{
 		std::cout << "Min value: ";
-		std::cout << arr.get_minVal() << std::endl;
+		std::cout << arr.min() << std::endl;
 		break;
 	}
 	case '7':
 	{
 		std::cout << "Size array: ";
-		std::cout << arr.get_size() << std::endl;
+		std::cout << arr.size() << std::endl;
 		break;
 	}
 	case '8':
@@ -88,7 +88,7 @@ void menu(Array &arr)
 		int value;
 		std::cin >> value;
 		std::cout << std::endl;
-		arr.replace_value(index, value);
+		arr.replace(index, value);
 		break;
 	}
 	}
@@ -98,15 +98,6 @@ void menu(Array &arr)
 void main()
 {
 	Array arr;
-	for (int i = 0; i < 10000; i++)
-	{
-		arr.add_item(i);
-//		std::cout << "max= "<<arr.get_max_size() << " size ="<<arr.get_size()<<std::endl;
-	}
-	for (int i = 9989; i >= 0; i--)
-	{
-		arr.remove_item_index(i);
-//		std::cout << "max= " << arr.get_max_size() << " size =" << arr.get_size() << std::endl;
-	}
+
 	menu(arr);
 }

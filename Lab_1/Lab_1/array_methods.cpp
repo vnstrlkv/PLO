@@ -2,137 +2,188 @@
 
 Array::Array()
 {
-	max_size = 100;
-	current_index = 0;
-	ptr_array = new int[max_size];
-	size = 0;
+	maxSizeArray = 100;
+	currentIndex = 0;
+	ptrArray = new int[maxSizeArray];
+	sizeArray = 0;
 }
+
+Array::Array(int size, int value, ...)
+{
+	int *p = &value;
+	sizeArray = size;
+	maxSizeArray = size;
+	ptrArray = new int[maxSizeArray];
+	currentIndex = ptrArray[0];
+	for (int i = 0; i < size; i++)
+	{
+		ptrArray[i] = *p;
+		p++;
+	}
+
+}
+Array::Array(int *ptr, int size)
+{
+	sizeArray = size;
+	maxSizeArray = size;
+	ptrArray = new int[maxSizeArray];
+	currentIndex = ptrArray[0];
+	for (int i = 0; i < size; i++)
+	{
+		ptrArray[i] = ptr[i];
+	}
+
+}
+Array::Array(const Array &tmp)
+{
+	sizeArray = tmp.sizeArray;
+	maxSizeArray = tmp.maxSizeArray;
+	ptrArray = new int[maxSizeArray];
+	for (int i = 0; i < sizeArray; i++)
+		ptrArray[i] = tmp.ptrArray[i];
+}
+
+
+
 
 Array::~Array()
 {
-	delete ptr_array;
+	delete[] ptrArray;
 }
 
 void Array::view() const
 {
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < sizeArray; i++)
 	{
 		if (i % 5 == 0)
 			std::cout << std::endl<<std::endl;
-		std::cout << std::setw(4) << std::left << i << ":" << std::setw(5) << std::left  << ptr_array[i] << "| ";
+		std::cout << i << ": " << std::setw(5) << std::left  << ptrArray[i] << "| ";
 	}
-	std::cout<< std::endl;
+	std::cout<< std::endl << std::endl;
 }
 
 
-void Array::add_item(int val)
+void Array::add(int val)
 {
-		ptr_array=resize_array();	
-		ptr_array[size] = val;
-		size++;		
+	//	ptrArray=resize_array();	
+		ptrArray[sizeArray] = val;
+		sizeArray++;		
 }
-void Array::remove_item_val(int val)
+
+Array* Array::copy()
 {
-	int number = search_item(val);
-	if (number != NULL)
+	Array *tmp;
+	tmp->sizeArray=sizeArray;
+	tmp->maxSizeArray= maxSizeArray;
+	tmp->ptrArray = new int[maxSizeArray];
+	for (int i = 0; i < sizeArray; i++)
+		tmp->ptrArray[i] = ptrArray[i];
+	return tmp;
+}
+
+
+void Array::remove(int val)
+{
+	int number = search(val);
+	if (number >= 0)
 	{
 		{
-			for (int i = number; i < size - 1; i++)
-				ptr_array[i] = ptr_array[i + 1];
+			for (int i = number; i < sizeArray - 1; i++)
+				ptrArray[i] = ptrArray[i + 1];
 		}
-		size--;
+		sizeArray--;
 	}
-		ptr_array = resize_array();
+		//ptrArray = resize_array();
 }
 
-void Array::remove_item_index(int index)
+void Array::removeByIndex(int index)
 {
-	if (index>=0 && index < size)
+	if (index>=0 && index < sizeArray)
 	{
 		{
-			for (int i = index; i < size; i++)
-				ptr_array[i] = ptr_array[i + 1];
+			for (int i = index; i < (sizeArray); i++)
+				ptrArray[i] = ptrArray[i + 1];
 		}
-		size--;
+		sizeArray--;
 	}
-	ptr_array = resize_array();
+//	ptrArray = resize_array();
 }
 
-int Array::search_item(int item)
+int Array::search(int item)
 {
-	current_index = NULL;
-	for (int i=0;i<size;i++)
+	currentIndex = -1;
+	for (int i=0;i<sizeArray;i++)
 
-		if (ptr_array[i] == item)
+		if (ptrArray[i] == item)
 		{
-			current_index = i;
+			currentIndex = i;
 			break;
 		}
 
-	return current_index;
+	return currentIndex;
 }
 
 int* Array::resize_array()
 {
-	int *tmp=ptr_array;
-	if (size >= max_size / 3 * 2)
+	int *tmp=ptrArray;
+	if (sizeArray >= maxSizeArray / 3 * 2)
 	{
-		max_size = max_size * 2;
-		tmp=new int [max_size];
-		for (int i = 0; i < size; i++)
-			tmp[i] = ptr_array[i];
-		delete[] ptr_array;
+		maxSizeArray = maxSizeArray * 2;
+		tmp=new int [maxSizeArray];
+		for (int i = 0; i < sizeArray; i++)
+			tmp[i] = ptrArray[i];
+		delete[] ptrArray;
 	}
-	else if (size <= max_size / 2 && max_size>100)
+	else if (sizeArray <= maxSizeArray / 2 && maxSizeArray>100)
 	{
-		max_size = max_size / 3 * 2;
-		tmp = new int[max_size];
-		for (int i = 0; i < size; i++)
-			tmp[i] = ptr_array[i];
-		delete[] ptr_array;
+		maxSizeArray = maxSizeArray / 3 * 2;
+		tmp = new int[maxSizeArray];
+		for (int i = 0; i < sizeArray; i++)
+			tmp[i] = ptrArray[i];
+		delete[] ptrArray;
 	}
 	return tmp;
 }
 
-void Array::replace_value(int index, int value)
+void Array::replace(int index, int value)
 {
-	if (index>=0 && index < size)
-	ptr_array[index] = value;
+	if (index>=0 && index < sizeArray)
+	ptrArray[index] = value;
 }
 
-int Array::get_max_size() const
+int Array::maxSize() const
 {
-	return max_size;
+	return maxSizeArray;
 }
-int Array::get_size() const
+int Array::size() const
 {
-	return size;
+	return sizeArray;
 }
-int Array::get_item(int index) const
+int Array::get(int index) const
 {
 	int tmp = NULL;
-	if (index<size)
-	tmp= ptr_array[index];
+	if (index<sizeArray)
+	tmp= ptrArray[index];
 	return tmp;
 }
-int Array::get_maxVal() const
+int Array::max() const
 {
-	int tmp = ptr_array[0];
+	int tmp = ptrArray[0];
 	{
-		for (int i = 1; i < size; i++)
-			if (tmp < ptr_array[i])
-				tmp = ptr_array[i];
+		for (int i = 1; i < sizeArray; i++)
+			if (tmp < ptrArray[i])
+				tmp = ptrArray[i];
 	}
 	return tmp;
 }
 
-int Array::get_minVal() const
+int Array::min() const
 {
-	int tmp = ptr_array[0];
+	int tmp = ptrArray[0];
 	{
-		for (int i = 1; i < size; i++)
-			if (tmp > ptr_array[i])
-				tmp = ptr_array[i];
+		for (int i = 1; i < sizeArray; i++)
+			if (tmp > ptrArray[i])
+				tmp = ptrArray[i];
 	}
 	return tmp;
 }

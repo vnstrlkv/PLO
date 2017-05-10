@@ -10,26 +10,29 @@
 
 class Array
 {
-	int max_size;
-	int current_index;
-	int *ptr_array;
-	int size;
+	int maxSizeArray;
+	int currentIndex;
+	int *ptrArray;
+	int sizeArray;
 	int* resize_array();
 
 public:
-	Array();// копирования, с параметрами //метод copy
+	Array();
 	Array(int size, int value, ...);
+	Array(int *ptr, int size);
+	Array(const Array & tmp);
 
 	~Array();
 	void view() const;
-	void add(int value);//add
-	void remove(int value);//remove
-	void remove_item_index(int index);//removebyindex
-	int search(int value);//search
-	void replace(int index, int value);//repace
-	int size()const; //size || count ||length
-	int max_size()const;//max_size
-	int get(int index)const;//get
-	int max()const;//max
-	int min()const;//min ///
+	void add(int value);
+	Array* copy();
+	void remove(int value);
+	void removeByIndex(int index);
+	int search(int value);
+	void replace(int index, int value);
+	int size()const; 
+	int maxSize()const;
+	int get(int index)const;
+	int max()const;
+	int min()const;
 };
