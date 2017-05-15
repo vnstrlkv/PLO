@@ -97,7 +97,24 @@ void menu(Array &arr)
 
 void main()
 {
-	Array arr;
+	Array arr1(5, 1, 1, 1, 1, 1);
+	Array arr2(3, 0, 0, 1);
+	
+	Array arr = arr2 + arr1;
+	Array arr3;
+	arr[0] = 10;
+	arr++;
+	++arr;
+	arr3=arr-10;
+	std::cout << arr3;
+	std::cin >> arr3;
+	std::ofstream ofs("test.txt");
+	ofs << arr3;
+	ofs.close();
+	Array arr4;
 
-	menu(arr);
+	std::ifstream test("test.txt");
+	test >> arr4;
+	test.close();
+	menu(arr4);
 }

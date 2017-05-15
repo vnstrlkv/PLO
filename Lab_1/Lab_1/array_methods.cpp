@@ -2,7 +2,7 @@
 
 Array::Array()
 {
-	maxSizeArray = 100;
+	maxSizeArray = 4;
 	currentIndex = 0;
 	ptrArray = new int[maxSizeArray];
 	sizeArray = 0;
@@ -65,20 +65,14 @@ void Array::view() const
 
 void Array::add(int val)
 {
-	//	ptrArray=resize_array();	
+		ptrArray=resize_array();	
 		ptrArray[sizeArray] = val;
 		sizeArray++;		
 }
 
-Array* Array::copy()
+Array Array::copy()
 {
-	Array *tmp;
-	tmp->sizeArray=sizeArray;
-	tmp->maxSizeArray= maxSizeArray;
-	tmp->ptrArray = new int[maxSizeArray];
-	for (int i = 0; i < sizeArray; i++)
-		tmp->ptrArray[i] = ptrArray[i];
-	return tmp;
+		return Array(*this);
 }
 
 
@@ -93,7 +87,7 @@ void Array::remove(int val)
 		}
 		sizeArray--;
 	}
-		//ptrArray = resize_array();
+		ptrArray = resize_array();
 }
 
 void Array::removeByIndex(int index)
@@ -106,7 +100,7 @@ void Array::removeByIndex(int index)
 		}
 		sizeArray--;
 	}
-//	ptrArray = resize_array();
+	ptrArray = resize_array();
 }
 
 int Array::search(int item)
@@ -186,4 +180,141 @@ int Array::min() const
 				tmp = ptrArray[i];
 	}
 	return tmp;
+}
+
+
+
+Array operator +(Array &left, Array &right)
+{
+	Array tmp;
+	if (left.sizeArray >= right.sizeArray)
+	{
+		tmp = left;
+		for (int i = 0; i < right.sizeArray; i++)
+			tmp.ptrArray[i] += right.ptrArray[i];
+	}
+	if (left.sizeArray < right.sizeArray)
+	{
+		tmp = right;
+		for (int i = 0; i < left.sizeArray; i++)
+			tmp.ptrArray[i] += left.ptrArray[i];
+	}
+	return tmp;
+};
+Array operator -(Array &left, Array &right)
+{
+	Array tmp;
+	if (left.sizeArray >= right.sizeArray)
+	{
+		tmp = left;
+		for (int i = 0; i < right.sizeArray; i++)
+			tmp.ptrArray[i] -= right.ptrArray[i];
+	}
+	if (left.sizeArray < right.sizeArray)
+	{
+		tmp = right;
+		for (int i = 0; i < left.sizeArray; i++)
+			tmp.ptrArray[i] -= left.ptrArray[i];
+	}
+	return tmp;
+};
+Array& Array:: operator ++(int)
+{
+	for (int i = 0; i < size(); i++)
+	{
+		this->ptrArray[i]++;
+	}
+	return *this;
+};
+Array& Array:: operator ++()
+{
+	Array tmp(*this);
+	for (int i = 0; i < size(); i++)
+	{
+		ptrArray[i]++;
+	}
+	return tmp;
+};
+
+Array& Array:: operator --(int)
+{
+	for (int i = 0; i < size(); i++)
+	{
+		this->ptrArray[i]--;
+	}
+	return *this;
+};
+Array& Array:: operator --()
+{
+	Array tmp(*this);
+	for (int i = 0; i < size(); i++)
+	{
+		ptrArray[i]--;
+	}
+	return tmp;
+};
+
+Array Array::operator +(int number)
+{
+
+	Array tmp(*this);
+	for (int i = 0; i < size(); i++)
+	{
+		tmp.ptrArray[i]+=number;
+	}
+	return tmp;
+};
+Array Array::operator -(int number)
+{
+	Array tmp(*this);
+	for (int i = 0; i < size(); i++)
+	{
+		tmp.ptrArray[i] -= number;
+	}
+	return tmp;
+};
+
+
+std::ostream& operator << (std::ostream &out, const Array &obj)
+{
+	for (int i = 0; i < obj.size(); i++)
+	{
+		if (i % 5 == 0)
+			out << std::endl << std::endl;
+		out << i << ": " << std::setw(5) << std::left << obj.ptrArray[i] << "| ";
+	}	
+	return out;
+}
+
+std::istream& operator >> (std::istream &in, Array &obj)
+{
+	std::cout << "Input size: ";
+	in >> obj.sizeArray;
+	std::cout << std::endl << "Input value:";
+	for (int i = 0; i < obj.size(); i++)
+	{
+		in >> obj[i];
+	}
+	return in;
+}
+
+
+std::ofstream& operator << (std::ofstream &fout, const Array  &obj)
+{
+	fout << obj.size()<<" ";
+	for (int i = 0; i < obj.size(); i++)
+	{
+		fout << obj.ptrArray[i] << " ";
+	}
+	return fout;
+}
+
+std::ifstream& operator >> (std::ifstream &fin, Array &obj)
+{
+	fin >> obj.sizeArray;
+	for (int i = 0; i < obj.size(); i++)
+	{
+		fin >> obj[i];
+	}
+	return fin;
 }
