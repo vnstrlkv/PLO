@@ -3,14 +3,16 @@
 //Постpоить класс для pаботы с массивом.
 //Класс должен включать соответствующие поля : максимальный размер массива, индекс текущего элемента, указатель на массив.
 //Класс должен обеспечивать пpостейшие функции для pаботы с данными классами : добавление элементов, поиск, замена, удаление, вывод массива в удобной форме и т.д.
-
+#pragma once
 #include <conio.h>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 
+
 class Array
 {
+protected:
 	int maxSizeArray;
 	int currentIndex;
 	int *ptrArray;
@@ -43,6 +45,7 @@ public:
 	
 
 public:
+	
 	Array();
 	Array(int size, int value, ...);
 	Array(int *ptr, int size);

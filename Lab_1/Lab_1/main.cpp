@@ -1,5 +1,7 @@
+#pragma once
 #include "Array.h"
-void menu(Array &arr);
+#include "CyclicArray.h"
+#include "Queue.h"
 void show_menu()
 {
 	std::cout 
@@ -7,14 +9,14 @@ void show_menu()
 		<< "2. Add item" << std::endl 
 		<< "3. Remove item by val" << std::endl 
 		<< "4. Remove item by index" << std::endl 
-		<< "5. Get max value" << std::endl
+		<< "5. Get value" << std::endl
 		<< "6. Get min value" << std::endl
 		<< "7. Get size" << std::endl
 		<< "8. Replace value" << std::endl
 		<< "esc: exit" << std::endl << std::endl;
 }
-
-void menu(Array &arr)
+template <typename T>
+void menu(T &arr)
 {
 	show_menu();
 	char key;
@@ -61,8 +63,8 @@ void menu(Array &arr)
 
 	case '5':
 	{
-		std::cout << "Max value: ";
-		std::cout <<arr.max()<< std::endl;
+		std::cout << "Get: ";
+		std::cout <<arr.get()<< std::endl;
 		break;
 	}
 	case '6':
@@ -74,7 +76,7 @@ void menu(Array &arr)
 	case '7':
 	{
 		std::cout << "Size array: ";
-		std::cout << arr.maxSize() << std::endl;
+		std::cout << arr.size() << std::endl;
 		break;
 	}
 	case '8':
@@ -96,25 +98,27 @@ void menu(Array &arr)
 
 void main()
 {
-	Array arr1(5, 1, 1, 1, 1, 1);
+	Array arr1(5, 2, 3, 4,5, 6);
 	Array arr2(3, 0, 0, 1);
 	
 	Array arr = arr2 + arr1;
 	Array arr3;
-	arr[0] = 10;
+	//arr[0] = 10;
 	arr++;
-	++arr;
+//	++arr;
 	arr3=arr-10;
-	std::cout << arr3;
-	std::cin >> arr3;
-	std::ofstream ofs("test.txt");
-	ofs << arr3;
-	ofs.close();
+	std::cout << arr;
+//	std::cin >> arr3;
+//	std::ofstream ofs("test.txt");
+//	ofs << arr3;
+//	ofs.close();
 	Array arr4;
 
 //	std::ifstream test("test.txt");
 //	test >> arr4;
 //	test.close();
 //	std::cout <<std:: endl;
-	menu(arr4);
+	CyclicArray arr6 ;
+	Queue  arr7(1,1);
+	menu(arr7);
 }
