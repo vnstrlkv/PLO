@@ -15,50 +15,13 @@ class Array
 	int currentIndex;
 	int *ptrArray;
 	int sizeArray;
-	int* resize_array();
+	bool chekSize();
 public:
 
-	int & operator [] (int index) const { return ptrArray[index]; };
-	Array& operator = (Array &rhs)
-	{
-		if (this == &rhs)
-		{
-			return *this;
-		}
-		maxSizeArray=rhs.maxSizeArray;
-		currentIndex=rhs.currentIndex;
-		sizeArray=rhs.sizeArray;
-		delete[] ptrArray;
-		ptrArray = new int [sizeArray];
-		for (int i = 0; i < sizeArray; i++)
-		{
-			ptrArray[i] = rhs.ptrArray[i];
-		}
-		return *this;
-	};
-	bool operator == (Array &rhs)const
-	{
-		bool flag = true;
-		if (rhs.size() != size())
-		{
-			flag = false;
-			return flag;
-		}
-		for (int i = 0; i < size(); i++)
-		{
-			if (rhs.ptrArray[i] != this->ptrArray[i])
-			{
-				flag = false;
-				break;
-			}
-		}
-		return flag;
-	}
-	bool operator != ( Array &rhs) const
-	{
-		bool flag = !(*this == rhs);
-		return flag;
-	}
+	int & operator [] (int index) const;
+	Array& operator = (Array &rhs);
+	bool operator == (Array &rhs)const;
+	bool operator != (Array &rhs) const;
 
 	Array& operator ++();
 	Array& operator ++(int);
@@ -87,12 +50,12 @@ public:
 
 	~Array();
 	void view() const;
-	void add(int value);
+	bool add(int value);
 	Array copy();
-	void remove(int value);
-	void removeByIndex(int index);
+	bool remove(int value);
+	bool removeByIndex(int index);
 	int search(int value);
-	void replace(int index, int value);
+	bool replace(int index, int value);
 	int size()const; 
 	int maxSize()const;
 	int get(int index)const;

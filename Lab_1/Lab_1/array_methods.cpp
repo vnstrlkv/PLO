@@ -63,11 +63,15 @@ void Array::view() const
 }
 
 
-void Array::add(int val)
+bool Array::add(int val)
 {
-		ptrArray=resize_array();	
+	bool flag = chekSize();
+	if (flag)
+	{
 		ptrArray[sizeArray] = val;
-		sizeArray++;		
+		sizeArray++;
+	}
+	return flag;
 }
 
 Array Array::copy()
@@ -76,8 +80,9 @@ Array Array::copy()
 }
 
 
-void Array::remove(int val)
+bool Array::remove(int val)
 {
+	bool flag = false;
 	int number = search(val);
 	if (number >= 0)
 	{
@@ -86,12 +91,15 @@ void Array::remove(int val)
 				ptrArray[i] = ptrArray[i + 1];
 		}
 		sizeArray--;
+		flag = true;
 	}
-		ptrArray = resize_array();
+	return flag;
+
 }
 
-void Array::removeByIndex(int index)
+bool Array::removeByIndex(int index)
 {
+	bool flag = false;
 	if (index>=0 && index < sizeArray)
 	{
 		{
@@ -99,8 +107,9 @@ void Array::removeByIndex(int index)
 				ptrArray[i] = ptrArray[i + 1];
 		}
 		sizeArray--;
+		flag = true;
 	}
-	ptrArray = resize_array();
+	return flag;
 }
 
 int Array::search(int item)
@@ -117,32 +126,24 @@ int Array::search(int item)
 	return currentIndex;
 }
 
-int* Array::resize_array()
+bool Array::chekSize()
 {
-	int *tmp=ptrArray;
-	if (sizeArray >= maxSizeArray / 3 * 2)
-	{
-		maxSizeArray = maxSizeArray * 2;
-		tmp=new int [maxSizeArray];
-		for (int i = 0; i < sizeArray; i++)
-			tmp[i] = ptrArray[i];
-		delete[] ptrArray;
-	}
-	else if (sizeArray <= maxSizeArray / 2 && maxSizeArray>100)
-	{
-		maxSizeArray = maxSizeArray / 3 * 2;
-		tmp = new int[maxSizeArray];
-		for (int i = 0; i < sizeArray; i++)
-			tmp[i] = ptrArray[i];
-		delete[] ptrArray;
-	}
-	return tmp;
+	bool flag = false;
+	if (size() < maxSize())
+		flag = true;
+	return flag;
+
 }
 
-void Array::replace(int index, int value)
+bool Array::replace(int index, int value)
 {
-	if (index>=0 && index < sizeArray)
-	ptrArray[index] = value;
+	bool flag = false;
+	if (index >= 0 && index < sizeArray)
+	{
+		ptrArray[index] = value;
+		flag = true;
+	}
+	return flag;
 }
 
 int Array::maxSize() const
@@ -184,6 +185,48 @@ int Array::min() const
 
 
 
+int & Array:: operator [] (int index) const { return ptrArray[index]; }
+
+ Array& Array:: operator = (Array &rhs)
+{
+	if (this == &rhs)
+	{
+		return *this;
+	}
+	maxSizeArray = rhs.maxSizeArray;
+	currentIndex = rhs.currentIndex;
+	sizeArray = rhs.sizeArray;
+	delete[] ptrArray;
+	ptrArray = new int[sizeArray];
+	for (int i = 0; i < sizeArray; i++)
+	{
+		ptrArray[i] = rhs.ptrArray[i];
+	}
+	return *this;
+};
+ bool Array:: operator == (Array &rhs)const
+ {
+	 bool flag = true;
+	 if (rhs.size() != size())
+	 {
+		 flag = false;
+		 return flag;
+	 }
+	 for (int i = 0; i < size(); i++)
+	 {
+		 if (rhs.ptrArray[i] != this->ptrArray[i])
+		 {
+			 flag = false;
+			 break;
+		 }
+	 }
+	 return flag;
+ }
+ bool Array:: operator != (Array &rhs) const
+ {
+	 bool flag = !(*this == rhs);
+	 return flag;
+ }
 Array operator +(Array &left, Array &right)
 {
 	Array tmp;
@@ -234,8 +277,7 @@ Array& Array:: operator ++()
 		ptrArray[i]++;
 	}
 	return tmp;
-};
-
+}
 Array& Array:: operator --(int)
 {
 	for (int i = 0; i < size(); i++)
@@ -253,7 +295,6 @@ Array& Array:: operator --()
 	}
 	return tmp;
 };
-
 Array Array::operator +(int number)
 {
 
@@ -273,7 +314,6 @@ Array Array::operator -(int number)
 	}
 	return tmp;
 };
-
 
 std::ostream& operator << (std::ostream &out, const Array &obj)
 {
