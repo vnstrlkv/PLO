@@ -1,5 +1,4 @@
 #include "Array.h"
-#include <conio.h>
 void menu(Array &arr);
 void show_menu()
 {
@@ -75,7 +74,7 @@ void menu(Array &arr)
 	case '7':
 	{
 		std::cout << "Size array: ";
-		std::cout << arr.size() << std::endl;
+		std::cout << arr.maxSize() << std::endl;
 		break;
 	}
 	case '8':
@@ -113,8 +112,9 @@ void main()
 	ofs.close();
 	Array arr4;
 
-	std::ifstream test("test.txt");
-	test >> arr4;
-	test.close();
+//	std::ifstream test("test.txt");
+//	test >> arr4;
+//	test.close();
+//	std::cout <<std:: endl;
 	menu(arr4);
 }

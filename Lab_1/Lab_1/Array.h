@@ -18,8 +18,8 @@ class Array
 	int* resize_array();
 public:
 
-	int & operator [] (int index) { return ptrArray[index]; };
-	Array& operator = (const Array &rhs)
+	int & operator [] (int index) const { return ptrArray[index]; };
+	Array& operator = (Array &rhs)
 	{
 		if (this == &rhs)
 		{
@@ -36,7 +36,30 @@ public:
 		}
 		return *this;
 	};
-	
+	bool operator == (Array &rhs)const
+	{
+		bool flag = true;
+		if (rhs.size() != size())
+		{
+			flag = false;
+			return flag;
+		}
+		for (int i = 0; i < size(); i++)
+		{
+			if (rhs.ptrArray[i] != this->ptrArray[i])
+			{
+				flag = false;
+				break;
+			}
+		}
+		return flag;
+	}
+	bool operator != ( Array &rhs) const
+	{
+		bool flag = !(*this == rhs);
+		return flag;
+	}
+
 	Array& operator ++();
 	Array& operator ++(int);
 	Array& operator --();
@@ -54,7 +77,7 @@ public:
 	friend std::ofstream& operator << (std::ofstream &fout, const Array& obj);
 	friend std::ifstream& operator >> (std::ifstream &fin, Array &obj);
 
-
+	
 
 public:
 	Array();
