@@ -15,9 +15,10 @@ void show_menu()
 		<< "8. Replace value" << std::endl
 		<< "esc: exit" << std::endl << std::endl;
 }
-template <typename T>
-void menu(T &arr)
+template <class T, typename TT>
+void menu(T &arr, TT)
 {
+	TT temp=0;
 	show_menu();
 	char key;
 	key=getch();
@@ -35,16 +36,19 @@ void menu(T &arr)
 	}
 	case '2':
 	{
-		int val;
+		TT val;
 		std::cout << "Input val: ";
+		
 		std::cin >> val;
+		std::cin.clear();
 		std::cout << std::endl;
 		arr.add(val);
+	
 		break;
 	}
 	case '3':
 	{
-		int val;
+		TT val;
 		std::cout << "Input val: ";
 		std::cin >> val;
 		std::cout << std::endl;
@@ -64,7 +68,7 @@ void menu(T &arr)
 	case '5':
 	{
 		std::cout << "Get: ";
-		std::cout <<arr.get()<< std::endl;
+	//	std::cout <<arr.get()<< std::endl;
 		break;
 	}
 	case '6':
@@ -86,39 +90,45 @@ void menu(T &arr)
 		std:: cin >> index;
 		std::cout << std::endl;
 		std::cout << "Input value: " << std::endl;
-		int value;
+		TT value;
 		std::cin >> value;
 		std::cout << std::endl;
 		arr.replace(index, value);
 		break;
 	}
 	}
-	menu(arr);
+	menu(arr, temp);
 }
 
 void main()
 {
-	Array arr1(5, 2, 3, 4,5, 6);
-	Array arr2(3, 0, 0, 1);
-	
-	Array arr = arr2 + arr1;
-	Array arr3;
+	Array<char> arr1;
+	Array<char> arr2(3, 'r', 'd', 's');
+	char temp=0;
+	arr1 = arr2;
+	 std::cout<<arr2;
+	 std::cin >> arr1;
+	 arr1 == arr2;
+	 Array<char> arr3 = arr1 + arr2;
+
+	//Array<char> arr = arr2 + arr1;
+	//Array arr3;
 	//arr[0] = 10;
-	arr++;
+//	arr++;
 //	++arr;
-	arr3=arr-10;
-	std::cout << arr;
+//	arr3=arr-10;
+//	std::cout << arr;
 //	std::cin >> arr3;
 //	std::ofstream ofs("test.txt");
 //	ofs << arr3;
 //	ofs.close();
-	Array arr4;
+//	Array arr4;
 
 //	std::ifstream test("test.txt");
 //	test >> arr4;
 //	test.close();
 //	std::cout <<std:: endl;
-	CyclicArray arr6 ;
-	Queue  arr7(1,1);
-	menu(arr7);
+//	CyclicArray arr6 ;
+//	Queue  arr7(1,1);
+	menu(arr3, temp);
 }

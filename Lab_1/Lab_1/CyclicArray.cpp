@@ -1,9 +1,17 @@
 #include "CyclicArray.h"
+
+
+
 CyclicArray::CyclicArray()
 {
 Array:Array();
 	ptr = ptrArray; 
 }
+
+CyclicArray::CyclicArray(int *ptrtmp, int size) :Array(ptrtmp, size) { ptr = ptrArray; };
+CyclicArray::CyclicArray(const Array & tmp) :Array(tmp) { ptr = ptrArray; };
+
+
 CyclicArray::CyclicArray(int size, int value, ...)
 {
 	int *p = &(value);
@@ -19,8 +27,9 @@ CyclicArray::CyclicArray(int size, int value, ...)
 	ptr = ptrArray;
 }
 
-void CyclicArray::add(int value)
+bool CyclicArray::add(int value)
 {
+	bool flag=true;
 	if (Array::add(value) == false)
 	{
 		*ptr = value;
@@ -29,5 +38,6 @@ void CyclicArray::add(int value)
 			ptr = ptrArray;
 	}
 	else (ptr = ptrArray);
+	return flag;
 }
 
