@@ -1,7 +1,7 @@
 #pragma once
 #include "Array.h"
 
-class Queue : public Array
+class Queue : public Array<int>
 {
 protected:
 	int *first;

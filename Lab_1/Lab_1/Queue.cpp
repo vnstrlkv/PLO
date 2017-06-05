@@ -61,8 +61,10 @@ int* Queue::resize_array()
 
 bool Queue::add(int value)
 {
+	bool flag=false;
 	ptrArray=resize_array();
-	Array::add(value);
+	flag=Array::add(value);
+	return flag;
 }
 
 

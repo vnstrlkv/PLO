@@ -1,9 +1,8 @@
 
 #include "Array.h"
 
-class CyclicArray : public Array
+class CyclicArray : public Array<int>
 {
-protected:
 	int *ptr;
 
 public:
