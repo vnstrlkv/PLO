@@ -3,6 +3,7 @@
 
 class Queue : public Array
 {
+protected:
 	int *first;
 	int *last;
 	int* resize_array();
@@ -13,6 +14,6 @@ public:
 	Queue(const Array & tmp) ;
 
 
-	void add(int value);
+	bool add(int value);
 	int get();
 };

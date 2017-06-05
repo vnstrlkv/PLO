@@ -64,7 +64,7 @@ void menu(T &arr)
 	case '5':
 	{
 		std::cout << "Get: ";
-		std::cout <<arr.get()<< std::endl;
+//		std::cout <<arr.get()<< std::endl;
 		break;
 	}
 	case '6':
@@ -98,27 +98,42 @@ void menu(T &arr)
 
 void main()
 {
-	Array arr1(5, 2, 3, 4,5, 6);
-	Array arr2(3, 0, 0, 1);
-	
-	Array arr = arr2 + arr1;
-	Array arr3;
-	//arr[0] = 10;
-	arr++;
-//	++arr;
-	arr3=arr-10;
-	std::cout << arr;
-//	std::cin >> arr3;
-//	std::ofstream ofs("test.txt");
-//	ofs << arr3;
-//	ofs.close();
-	Array arr4;
+	system("color F0");
 
-//	std::ifstream test("test.txt");
-//	test >> arr4;
-//	test.close();
-//	std::cout <<std:: endl;
-	CyclicArray arr6 ;
-	Queue  arr7(1,1);
-	menu(arr7);
+	CyclicArray arr6(5,1,2,3,4,5) ;
+	std::cout << "CyclicArray  " <<arr6<< std::endl;
+	int val;
+	for (int i = 0; i < 8; i++)
+	{
+		std::cout << "Input val: ";
+		std::cin >> val;
+		std::cout << std::endl;
+		arr6.add(val);
+		std::cout << arr6 << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	Queue arr(5, 1, 2, 3, 4, 5);
+	std::cout << "Queue  " << arr << std::endl;
+	for (int i = 0; i < 2; i++)
+	{
+		std::cout << "Add val: ";
+		std::cin >> val;
+		std::cout << std::endl;
+		arr.add(val);
+		std::cout << arr << std::endl;
+	}
+	for (int i = 0; i < 15; i++)
+	{
+		std::cout << "Get val: "<<arr.get();
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << arr;
+		std::cout << std::endl;
+	}
+		
+
+
+
+	menu(arr);
 }

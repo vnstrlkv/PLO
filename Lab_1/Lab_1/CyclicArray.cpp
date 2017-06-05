@@ -19,6 +19,10 @@ CyclicArray::CyclicArray(int size, int value, ...)
 	ptr = ptrArray;
 }
 
+CyclicArray::CyclicArray(int *ptrtmp, int size) :Array(ptrtmp, size) { ptr = ptrArray; };
+CyclicArray::CyclicArray(const Array & tmp) :Array(tmp) { ptr = ptrArray; };
+
+
 void CyclicArray::add(int value)
 {
 	if (Array::add(value) == false)

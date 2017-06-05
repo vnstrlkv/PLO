@@ -44,7 +44,7 @@ public:
 
 	
 
-public:
+
 	
 	Array();
 	Array(int size, int value, ...);

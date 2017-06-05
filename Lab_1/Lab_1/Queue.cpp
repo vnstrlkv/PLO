@@ -59,7 +59,7 @@ int* Queue::resize_array()
 	return tmp;
 }
 
-void Queue::add(int value)
+bool Queue::add(int value)
 {
 	ptrArray=resize_array();
 	Array::add(value);
@@ -71,10 +71,6 @@ int Queue::get()
 	int tmp;
 	tmp = *first;
 	for (int i = 0; i < sizeArray-1; i++)
-	{
-		ptrArray[i] = ptrArray[i + 1];
-	}
-	for (int i = 0; i < sizeArray - 1; i++)
 	{
 		ptrArray[i] = ptrArray[i + 1];
 	}
